@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Created on Tue Feb 28 13:38:38 2023
 
@@ -47,43 +48,34 @@ def getAllLists(subsetSizes, numVals, minVal, maxVal):
     #loop through all elements of subsetSizes list
     for size in subsetSizes:
         #get a list of means based on subset size determined by current value of size
-        ###     you must write code
-
+        oneList = um.intMeans(numVals, size, minVal, maxVal)
         #append this to the allLists list
-        ###     you must write code
-
+        allList.append(oneList)
         #get the min and max of this particular list
-        ###     you must write code
-
+        oneListMin = min(oneList)
+        oneListMax = max(oneList)
         #append the oneListMin and oneListMax values to the correct list
-        ###     you must write code
-
+        mins.append(oneListMin)
+        maxs.append(oneListMax)
         #get the mean of this particular list
-        ###     you must write code
-
+        oneListMean = um.getMean(oneList)
         #append the oneListMean value to the list of means
-        ###     you must write code
-
+        means.append(oneListMean)
         #get the std dev of this list
-        ###     you must write code
-
+        oneListStdDev = um.stdDev(oneList)
         #append oneListStdDev to the stdDevs list
-        ###     you must write code
-
+        stdDevs.append(oneListStdDev)
         #print the formatted string with all the stat info
         #call the formatStatsOutput() function
-        ###     you must write code
-
+        formatStatsOutput(size, oneListMin, oneListMax, oneListMean, oneListStdDev)
         #generate histogram only for subset sizes of 10 and 30
-        #call the plotGist()
-        ###     you must write code
-        #after exiting loop, format featurs of the histogram
-        ### you must write this code
-        #add legend
-        #add xlabel
-        #add ylabel
-        #add title
-        
+        if size in [10, 30]:
+            plotHist(oneList, size)
+            #after exiting loop, format features of the histogram
+            plt.legend()
+            plt.xlabel('Numerical values')
+            plt.ylabel('Number of elements in each bin')
+            plt.title('Numerical Values')
         
         #return the means and stdDevs lists
         #these will be needed to make additional plots
@@ -173,6 +165,13 @@ def plotMeans(subsetSizes, means, minVal, maxVal):
     #set up a new figure for another line graph
     #this figure will display the mean values
     plt.figure(3)
+    #make new figure to plot means as subset size increases
+    plt.figure()
+    plt.plot(subsetSizes, means, 'b^--')
+    plt.title('Means as Subset Size Increases')
+    plt.xlabel('Subset Sizes')
+    plt.ylabel('The Mean for Each Subset Size')    
+
 #****************** end of function defs
     
 #set up constants for the random ints
@@ -184,10 +183,11 @@ MAX_VAL = 101
 #use range function to set up the list of subsetSizes
 #must result in the list: [10, 30, 50, 70, 90]
 ### you must write this code
+subsetSizes = list(range(10, 100, 20))
 
 #call getALLLists() to get the lists and plot the histograms
 ### you must write this code
-
+getAllLists([10, 30, 50, 70, 90], 1000, 0, 100)
 #plot the stdDevs
 ### you must write this code
 
