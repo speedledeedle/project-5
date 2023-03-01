@@ -1,14 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb 28 13:38:38 2023
+Created on Tue Feb 28 16:27:13 2023
 
-@author: Reed Bailey
+@author: bornr
 """
 
-#import the utilities module
+
+
+
+
+
 import utilitiesModule as um
-#import matplotlib.pyplot to enable generating histogram of the data
 import matplotlib.pyplot as plt
+
+subsetSizes = [10, 30, 50, 70, 90]
+meanMeansList = []
+stdDevsList = []
+
 
 def formatStatsOutput(subsetSz, minVal, maxVal, meanVal, sDevVal):
     """
@@ -24,16 +32,16 @@ def formatStatsOutput(subsetSz, minVal, maxVal, meanVal, sDevVal):
    
     print(strOutput)
 
+
 def getStats(numVals, subsetSz, minVal, maxVal):
     """
-    assumes all args are positive ints
-    function generates list of means of the subsets and calculates the stats
-    returns the following
-    min mean val
-    max mean val
-    mean of the means
-    std dev of the means
-   
+        assumes all args are positive ints
+        function generates list of means of the subsets and calculates the stats
+        returns the following
+        min mean val
+        max mean val
+        mean of the means
+        std dev of the means
     """
     #get the list of means of random ints of this sibset size
     meanInts = um.intMeans(numVals, subsetSz, minVal, maxVal)
@@ -50,12 +58,12 @@ def getStats(numVals, subsetSz, minVal, maxVal):
     
     return meanInts, meanMin, meanMax, mean_of_means, meanStdDev
 
+
 def plotHistograms(meanSmall, subsetSizeSmall, meansLarge, subsetSizeLarge):
     """
         assumes the two args are equally sized python lists of means
         plots both in a single histogram of histtype = step
     """
-    
     #set up the number of bins of the histogram
     numBins = 10
     
@@ -75,11 +83,11 @@ def plotHistograms(meanSmall, subsetSizeSmall, meansLarge, subsetSizeLarge):
     plt.ylabel('Number of elements in each bin')
     strTitle = 'Display means of subsets of a total of ' + f'{NUM_VALS:,.0f}' + ' random ints'
     plt.title(strTitle)
- 
-    
-def plotHist(subsetSz, oneList):
+
+
+#def plotHist(subsetSizes, oneList):
     """
-        assimes subsetSizes is a positive int
+        assumes subsetSizes is a positive int
         oneList is the python list to plot 
         Plots a histogram of oneList
             if subsetSz is 10 color is blue
