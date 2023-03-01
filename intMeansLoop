@@ -1,21 +1,15 @@
-# -*- coding: utf-8 -*-
 """
-Created on Tue Feb 28 16:27:13 2023
+Created on Tue Feb 28 13:38:38 2023
 
-@author: bornr
+@author: Reed Bailey
 """
 
-
-
-
-
-
+#import the utilities module
 import utilitiesModule as um
+#import matplotlib.pyplot to enable generating histogram of the data
 import matplotlib.pyplot as plt
 
 subsetSizes = [10, 30, 50, 70, 90]
-meanMeansList = []
-stdDevsList = []
 
 
 def formatStatsOutput(subsetSz, minVal, maxVal, meanVal, sDevVal):
@@ -32,16 +26,80 @@ def formatStatsOutput(subsetSz, minVal, maxVal, meanVal, sDevVal):
    
     print(strOutput)
 
+def getAllLists(subsetSizes, numVals, minVal, maxVal):
+    """
+        Assumes the following:
+            subsetSizes is a python list of positive ints
+            numVals, minVal and maxVal are positive ints
+            these are the 4 args for the call to um.intMeans()
+        iterates through all elements of subsetSizes
+        For each element in subsetSizes gets a list of means based on this subset size
+        Plots histograms if subsetSizes is 10 or 30
+        Returns lists of means of the means and stdDevs of the means
+            these will be needed for additional plots
+    """
+    #set up empty lists for all the information
+    allList = []
+    means = []
+    mins = []
+    maxs = []
+    stdDevs = []
+    #loop through all elements of subsetSizes list
+    for size in subsetSizes:
+        #get a list of means based on subset size determined by current value of size
+        ###     you must write code
+
+        #append this to the allLists list
+        ###     you must write code
+
+        #get the min and max of this particular list
+        ###     you must write code
+
+        #append the oneListMin and oneListMax values to the correct list
+        ###     you must write code
+
+        #get the mean of this particular list
+        ###     you must write code
+
+        #append the oneListMean value to the list of means
+        ###     you must write code
+
+        #get the std dev of this list
+        ###     you must write code
+
+        #append oneListStdDev to the stdDevs list
+        ###     you must write code
+
+        #print the formatted string with all the stat info
+        #call the formatStatsOutput() function
+        ###     you must write code
+
+        #generate histogram only for subset sizes of 10 and 30
+        #call the plotGist()
+        ###     you must write code
+        #after exiting loop, format featurs of the histogram
+        ### you must write this code
+        #add legend
+        #add xlabel
+        #add ylabel
+        #add title
+        
+        
+        #return the means and stdDevs lists
+        #these will be needed to make additional plots
+        return means, stdDevs
+
 
 def getStats(numVals, subsetSz, minVal, maxVal):
     """
-        assumes all args are positive ints
-        function generates list of means of the subsets and calculates the stats
-        returns the following
-        min mean val
-        max mean val
-        mean of the means
-        std dev of the means
+    assumes all args are positive ints
+    function generates list of means of the subsets and calculates the stats
+    returns the following
+    min mean val
+    max mean val
+    mean of the means
+    std dev of the means
+   
     """
     #get the list of means of random ints of this sibset size
     meanInts = um.intMeans(numVals, subsetSz, minVal, maxVal)
@@ -58,12 +116,12 @@ def getStats(numVals, subsetSz, minVal, maxVal):
     
     return meanInts, meanMin, meanMax, mean_of_means, meanStdDev
 
-
 def plotHistograms(meanSmall, subsetSizeSmall, meansLarge, subsetSizeLarge):
     """
         assumes the two args are equally sized python lists of means
         plots both in a single histogram of histtype = step
     """
+    
     #set up the number of bins of the histogram
     numBins = 10
     
@@ -83,9 +141,9 @@ def plotHistograms(meanSmall, subsetSizeSmall, meansLarge, subsetSizeLarge):
     plt.ylabel('Number of elements in each bin')
     strTitle = 'Display means of subsets of a total of ' + f'{NUM_VALS:,.0f}' + ' random ints'
     plt.title(strTitle)
-
-
-#def plotHist(subsetSizes, oneList):
+ 
+    
+def plotHist(subsetSizes, oneList):
     """
         assumes subsetSizes is a positive int
         oneList is the python list to plot 
@@ -106,7 +164,7 @@ def plotStdDevs(subsetSizes, stdDevs):
     #this figure will display the standard deviation values
     plt.figure(2)
     
-def plotMeans(subsetSize, means, minVal, maxVal):
+def plotMeans(subsetSizes, means, minVal, maxVal):
     """
         assumes subsetSizes is a python list of positive ints
         assumes means is a python list of floats
@@ -122,6 +180,23 @@ NUM_VALS = 100000
 MIN_VAL = 0
 MAX_VAL = 101
 
+
+#use range function to set up the list of subsetSizes
+#must result in the list: [10, 30, 50, 70, 90]
+### you must write this code
+
+#call getALLLists() to get the lists and plot the histograms
+### you must write this code
+
+#plot the stdDevs
+### you must write this code
+
+#plot the means
+### you must write this code
+
+
+
+
 #ask the user the size of two subsets one small and one large
 subsetSizeSmall = um.getValidInteger('Enter a small size of each subset: ')
 subsetSizeLarge = um.getValidInteger('Enter a larger size of each subset: ')
@@ -133,7 +208,7 @@ meanIntsSmall, min_small, max_small, mean_small, stdDev_small = getStats(NUM_VAL
 meansIntsLarge,min_large, max_large, mean_large, stdDev_large = getStats(NUM_VALS, subsetSizeLarge, MIN_VAL, MAX_VAL)
 
 #format and pront to console the stats
-print('\nSMALL SUBSET INFO:')
+print('\n:SMALL SUBSET INFO:')
 formatStatsOutput(subsetSizeSmall, min_small, max_small, mean_small, stdDev_small)
 
 print('\nLARGE SUBSET INFO:')
